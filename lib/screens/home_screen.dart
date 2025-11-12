@@ -13,7 +13,7 @@ class HomeScreen extends StatelessWidget {
           children: [
             const CircleAvatar(
               radius: 60,
-              backgroundImage: AssetImage('assets/profile.jpg'), // Add your photo
+              backgroundImage: AssetImage('assets/image/photo.png'), // Add your photo
             ),
             const SizedBox(height: 20),
             const Text(
