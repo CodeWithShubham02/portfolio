@@ -10,26 +10,71 @@ void main() {
   runApp(const PortfolioApp());
 }
 
-class PortfolioApp extends StatelessWidget {
+class PortfolioApp extends StatefulWidget {
   const PortfolioApp({super.key});
+
+  @override
+  State<PortfolioApp> createState() => _PortfolioAppState();
+}
+
+class _PortfolioAppState extends State<PortfolioApp> {
+  bool isDarkMode = false;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'My Portfolio',
       debugShowCheckedModeBanner: false,
+      themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
+        brightness: Brightness.light,
         useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.teal,
+          brightness: Brightness.light,
+        ),
+        scaffoldBackgroundColor: Colors.white,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.white,
+          foregroundColor: Colors.black,
+          elevation: 2,
+        ),
         fontFamily: 'Poppins',
       ),
-      home: const PortfolioHome(),
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.deepPurple,
+          brightness: Brightness.dark,
+        ),
+        scaffoldBackgroundColor: Colors.black,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.black,
+          foregroundColor: Colors.white,
+          elevation: 2,
+        ),
+        fontFamily: 'Poppins',
+      ),
+      home: PortfolioHome(
+        isDarkMode: isDarkMode,
+        onThemeToggle: (value) {
+          setState(() => isDarkMode = value);
+        },
+      ),
     );
   }
 }
 
 class PortfolioHome extends StatefulWidget {
-  const PortfolioHome({super.key});
+  final bool isDarkMode;
+  final ValueChanged<bool> onThemeToggle;
+
+  const PortfolioHome({
+    super.key,
+    required this.isDarkMode,
+    required this.onThemeToggle,
+  });
 
   @override
   State<PortfolioHome> createState() => _PortfolioHomeState();
@@ -50,8 +95,26 @@ class _PortfolioHomeState extends State<PortfolioHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('My Portfolio'),
+        title: const Text(
+          'My Portfolio',
+          style: TextStyle(
+            fontFamily: 'Poppins', // 👈 change to your preferred font
+            fontWeight: FontWeight.bold, // bold text
+            fontSize: 24, // 👈 increased font size
+            letterSpacing: 1.2, // optional: adds spacing between letters
+          ),
+        ),
         centerTitle: true,
+        actions: [
+          IconButton(
+            icon: Icon(
+              widget.isDarkMode ? Icons.wb_sunny : Icons.dark_mode,color: Colors.redAccent,
+            ),
+            onPressed: () {
+              widget.onThemeToggle(!widget.isDarkMode);
+            },
+          ),
+        ],
       ),
       body: screens[selectedIndex],
       bottomNavigationBar: NavigationBar(

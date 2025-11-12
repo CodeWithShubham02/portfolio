@@ -4,6 +4,8 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+import '../widgets/waveinghand_widget.dart';
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -59,10 +61,21 @@ class HomeScreen extends StatelessWidget {
               backgroundImage: AssetImage('assets/image/photo.png'),
             ),
             const SizedBox(height: 20),
-            const Text(
-              'Hi, I\'m Shubham Gupta 👋',
-              style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
-            ),
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  "Hi, I'm Shubham Gupta ",
+                  style: TextStyle(
+                    fontSize: 26,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(width: 6),
+                WavingHand(), // 👈 custom animated widget
+              ],
+            )
+,
             const SizedBox(height: 10),
             const Text(
               'Flutter Developer | API Integrator | Mobile Engineer',
