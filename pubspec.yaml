@@ -37,6 +37,7 @@ dependencies:
   url_launcher:
   path_provider:
   permission_handler:
+  google_fonts:
 
 dev_dependencies:
   flutter_test:

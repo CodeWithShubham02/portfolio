@@ -1,4 +1,6 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SkillsScreen extends StatefulWidget {
   const SkillsScreen({super.key});
@@ -12,12 +14,10 @@ class _SkillsScreenState extends State<SkillsScreen> {
     'Flutter',
     'Dart',
     'Java',
-    'C',
     'HTML',
     'CSS',
     'Firebase',
     'RESTful APIs',
-    'GraphQL',
     'Riverpod',
     'Provider',
     'GetX',
@@ -26,83 +26,163 @@ class _SkillsScreenState extends State<SkillsScreen> {
     'GetStorage',
     'SharedPreferences',
     'Android Studio',
-    'Xcode',
     'GitHub',
     'Push Notifications',
-    'Deep Linking',
     'Google Maps',
-    'Payment Gateway Integration',
-    'Firebase Chat',
+    'Payment Gateway',
+    'Firebase DB',
   ];
 
   int? hoveredIndex;
 
+  // Optionally: simple map of icons for top skills
+  IconData _getSkillIcon(String skill) {
+    switch (skill.toLowerCase()) {
+      case 'flutter':
+        return Icons.flutter_dash;
+      case 'dart':
+        return Icons.code;
+      case 'java':
+        return Icons.coffee;
+      case 'firebase':
+        return Icons.cloud;
+      case 'github':
+        return Icons.folder_shared;
+      case 'google maps':
+        return Icons.map;
+      default:
+        return Icons.bolt;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[100],
-      body: Padding(
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          children: [
-            const Text(
-              'Technical Skills',
-              style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 20),
-            Expanded(
-              child: GridView.builder(
-                itemCount: skills.length,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2, // auto adjust later for web/mobile
-                  crossAxisSpacing: 12,
-                  mainAxisSpacing: 12,
-                  childAspectRatio: 3,
+      // Gradient background for a premium feel
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Color(0xffe0f7fa), Color(0xfff1f8e9)],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Technical Skills',
+                style: GoogleFonts.poppins(
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.teal[700],
                 ),
-                itemBuilder: (context, index) {
-                  final isHovered = hoveredIndex == index;
-                  return MouseRegion(
-                    onEnter: (_) => setState(() => hoveredIndex = index),
-                    onExit: (_) => setState(() => hoveredIndex = null),
-                    child: GestureDetector(
-                      onTapDown: (_) => setState(() => hoveredIndex = index),
-                      onTapCancel: () => setState(() => hoveredIndex = null),
-                      onTapUp: (_) => setState(() => hoveredIndex = null),
-                      child: AnimatedContainer(
-                        duration: const Duration(milliseconds: 300),
-                        curve: Curves.easeInOut,
-                        transform: isHovered
-                            ? (Matrix4.identity()..scale(1.05))
-                            : Matrix4.identity(),
-                        decoration: BoxDecoration(
-                          color: isHovered ? Colors.blueAccent : Colors.white,
-                          borderRadius: BorderRadius.circular(12),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.1),
-                              blurRadius: 6,
-                              offset: const Offset(0, 3),
+              ),
+              const SizedBox(height: 10),
+              Text(
+                "Here are some technologies and tools I use to build apps 👇",
+                style: GoogleFonts.poppins(
+                  fontSize: 16,
+                  color: Colors.grey[700],
+                ),
+              ),
+              const SizedBox(height: 30),
+
+              // Responsive Grid
+              Expanded(
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    int crossAxisCount = 2;
+                    if (constraints.maxWidth > 900) {
+                      crossAxisCount = 4;
+                    } else if (constraints.maxWidth > 600) {
+                      crossAxisCount = 3;
+                    }
+                    return GridView.builder(
+                      itemCount: skills.length,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: crossAxisCount,
+                        crossAxisSpacing: 15,
+                        mainAxisSpacing: 15,
+                        childAspectRatio: 3,
+                      ),
+                      itemBuilder: (context, index) {
+                        final isHovered = hoveredIndex == index;
+                        return MouseRegion(
+                          onEnter: (_) => setState(() => hoveredIndex = index),
+                          onExit: (_) => setState(() => hoveredIndex = null),
+                          child: AnimatedContainer(
+                            duration: const Duration(milliseconds: 300),
+                            transform: isHovered
+                                ? (Matrix4.identity()..scale(1.05))
+                                : Matrix4.identity(),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(18),
+                              boxShadow: [
+                                if (isHovered)
+                                  BoxShadow(
+                                    color:
+                                    Colors.tealAccent.withOpacity(0.4),
+                                    blurRadius: 16,
+                                    spreadRadius: 2,
+                                  ),
+                              ],
                             ),
-                          ],
-                        ),
-                        child: Center(
-                          child: Text(
-                            skills[index],
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: isHovered ? Colors.white : Colors.black87,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(18),
+                              child: BackdropFilter(
+                                filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: isHovered
+                                        ? Colors.teal.withOpacity(0.8)
+                                        : Colors.white.withOpacity(0.5),
+                                    borderRadius: BorderRadius.circular(18),
+                                    border: Border.all(
+                                      color: Colors.teal.withOpacity(0.3),
+                                      width: 1.5,
+                                    ),
+                                  ),
+                                  child: Center(
+                                    child: Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.center,
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Icon(
+                                          _getSkillIcon(skills[index]),
+                                          color: isHovered
+                                              ? Colors.white
+                                              : Colors.teal[700],
+                                        ),
+                                        const SizedBox(width: 10),
+                                        Text(
+                                          skills[index],
+                                          style: GoogleFonts.poppins(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w600,
+                                            color: isHovered
+                                                ? Colors.white
+                                                : Colors.black87,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
                             ),
                           ),
-                        ),
-                      ),
-                    ),
-                  );
-                },
+                        );
+                      },
+                    );
+                  },
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

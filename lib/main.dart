@@ -4,7 +4,7 @@ import 'package:portfolio/screens/contact_screen.dart';
 import 'package:portfolio/screens/experience_screen.dart';
 import 'package:portfolio/screens/home_screen.dart';
 import 'package:portfolio/screens/projects_screen.dart';
-import 'package:portfolio/screens/skills_screen.dart';
+import 'package:portfolio/screens/skills_screen.dart' hide AboutScreen;
 
 void main() {
   runApp(const PortfolioApp());
@@ -126,7 +126,7 @@ class _PortfolioHomeState extends State<PortfolioHome> {
           NavigationDestination(icon: Icon(Icons.person), label: 'About'),
           NavigationDestination(icon: Icon(Icons.code), label: 'Skills'),
           NavigationDestination(icon: Icon(Icons.work), label: 'Projects'),
-          NavigationDestination(icon: Icon(Icons.timeline), label: 'Experience'),
+          NavigationDestination(icon: Icon(Icons.timeline), label: 'Experienc'),
           NavigationDestination(icon: Icon(Icons.mail), label: 'Contact'),
         ],
       ),
