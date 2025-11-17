@@ -112,7 +112,7 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
                           child: AnimatedContainer(
                             duration: const Duration(milliseconds: 300),
                             transform: isHovered
-                                ? (Matrix4.identity()..scale(1.05))
+                                ? (Matrix4.identity()..scale(1.01))
                                 : Matrix4.identity(),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),

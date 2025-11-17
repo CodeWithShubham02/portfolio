@@ -13,7 +13,7 @@ class _ExperienceScreenState extends State<ExperienceScreen> {
 
   final List<Map<String, dynamic>> experiences = [
     {
-      'company': 'Bizipac Couriers Pvt. Ltd.',
+      'company': 'SGTech Technology Pvt. Ltd.',
       'role': 'Software Engineer',
       'duration': 'Jul 2025 – Present · Mumbai',
       'desc':
@@ -78,7 +78,7 @@ class _ExperienceScreenState extends State<ExperienceScreen> {
                     curve: Curves.easeInOut,
                     margin: const EdgeInsets.only(bottom: 20),
                     transform: isHovered
-                        ? (Matrix4.identity()..scale(1.03))
+                        ? (Matrix4.identity()..scale(1.02))
                         : Matrix4.identity(),
                     decoration: BoxDecoration(
                       color: Colors.white,

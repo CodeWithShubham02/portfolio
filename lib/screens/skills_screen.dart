@@ -116,7 +116,7 @@ class _SkillsScreenState extends State<SkillsScreen> {
                           child: AnimatedContainer(
                             duration: const Duration(milliseconds: 300),
                             transform: isHovered
-                                ? (Matrix4.identity()..scale(1.05))
+                                ? (Matrix4.identity()..scale(1.01))
                                 : Matrix4.identity(),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(18),
