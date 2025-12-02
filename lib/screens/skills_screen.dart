@@ -161,7 +161,7 @@ class _SkillsScreenState extends State<SkillsScreen> {
                                         Text(
                                           skills[index],
                                           style: GoogleFonts.poppins(
-                                            fontSize: 16,
+                                            fontSize: 14,
                                             fontWeight: FontWeight.w600,
                                             color: isHovered
                                                 ? Colors.white
